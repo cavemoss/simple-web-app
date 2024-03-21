@@ -1,0 +1,137 @@
+*{
+    box-sizing: border-box;
+    font-family: Epilogue;
+}
+a{
+    color: blue;
+}
+.card{
+    display: inline-block;
+    border: 1px solid rgb(181, 181, 181);
+    background-color: rgb(250, 250, 250);
+    border-radius: 10px;
+    position: absolute;
+    margin-top: 50px;
+    left: 50%;
+    transform: translate(-50%);
+    padding: 20px;
+}
+.card label{
+    display: block;
+    margin-bottom: 2px;
+}
+.card input{
+    padding: 6px;
+    margin-bottom: 10px;
+    border: 1px solid rgb(189, 189, 189);  
+    border-radius: 5px;
+}
+.card button{
+    width: 100%;
+    padding: 6px;
+    text-align: left;
+    background: blue;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+.card button:hover{
+    background: rgb(55, 55, 255);
+}
+.card button:active{
+    background: rgb(0, 0, 201);
+}
+.navbar{
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 240px;
+    background-color: black;
+    padding: 20px 40px;
+}
+.navbar p{
+    font-size: 30px;
+    color: rgb(210, 210, 210);
+    cursor: pointer;
+    transition: margin-left 0.3s;
+}
+.navbar p:hover{
+    color: white;
+    margin-left: 5px;
+}
+
+.content .logout {
+    color: blue;
+}
+.content .logout:hover{
+    margin-left: 10px;
+    color: white;
+    background-color: blue;
+}
+.content{
+    margin-top: 50px;
+    margin-left: 260px;
+}
+.content input{
+    padding: 6px;
+    margin-bottom: 10px;
+    border: 1.3px solid rgb(158, 158, 158);  
+    border-radius: 5px;
+}
+.content button{
+    padding: 6px;
+    text-align: left;
+    margin-left: 6px;
+    background: blue;
+    border: 1.3px solid blue; 
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+.content button:hover{
+    background: rgb(55, 55, 255);
+}
+.content button:active{
+    background: rgb(0, 0, 201);
+}
+.content p{
+    margin: 0;
+    margin-bottom: 10px;
+    margin-left: 8px;
+    display: inline-block;
+    padding: 2px;
+    padding-bottom: 0;
+    cursor: pointer;
+    color: rgb(183, 183, 183);
+}
+.content p:hover{
+    margin-left: 12px;
+    color: white;
+    background-color: rgb(209, 0, 0);
+}
+.content h2{
+    display: inline-block;
+}
+.lists-list button{
+    background-color: white;
+    color: blue;
+    border: 2px solid blue;
+    margin-bottom: 5px;
+}
+.lists-list button:hover{
+    background-color: blue;
+    color: white;
+    margin-bottom: 5px;
+}
+.view-list-ul p::selection{
+    background-color: none;
+}
+.view-list-ul .edit {
+    color: blue;
+}
+.view-list-ul .edit:hover{
+    margin-left: 10px;
+    color: white;
+    background-color: blue;
+}
