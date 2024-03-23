@@ -4,7 +4,6 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import './index.css'
 
 import Base from './Base.jsx'
-
 import Home from './pages/Home.jsx'
 import Create from './pages/Create.jsx'
 import Lists from './pages/Lists.jsx'

@@ -38,9 +38,9 @@ function Home(){
 
   return(
     <>
-      <h1 className='home-h2'>{`Welcome Home, ${backendData}`}</h1>
-      <p className='logout' onClick={() => navigate('/logout')}>Logout</p>
-      <p onClick={deleteAccount}>Delete This Account</p>
+      <h1>{`Welcome Home, ${backendData}`}</h1>
+      <p className='edit' onClick={() => navigate('/logout')}>Logout</p>
+      <p className='del' onClick={deleteAccount}>Delete This Account</p>
     </>
   );
 }

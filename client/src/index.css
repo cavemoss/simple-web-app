@@ -1,6 +1,21 @@
+@font-face {
+    font-family: Epilogue-Regular;
+    src: url(../fonts/Epilogue-Regular.ttf);
+}
+@font-face {
+    font-family: Epilogue-Medium;
+    src: url(../fonts/Epilogue-Medium.ttf);
+}
+@font-face {
+    font-family: Epilogue-SemiBold;
+    src: url(../fonts/Epilogue-SemiBold.ttf);
+}
 *{
     box-sizing: border-box;
-    font-family: Epilogue;
+    font-family: Epilogue-Regular;
+}
+h1, h2{
+    font-family: Epilogue-SemiBold;
 }
 a{
     color: blue;
@@ -60,15 +75,6 @@ a{
     color: white;
     margin-left: 5px;
 }
-
-.content .logout {
-    color: blue;
-}
-.content .logout:hover{
-    margin-left: 10px;
-    color: white;
-    background-color: blue;
-}
 .content{
     margin-top: 50px;
     margin-left: 260px;
@@ -98,17 +104,32 @@ a{
 .content p{
     margin: 0;
     margin-bottom: 10px;
-    margin-left: 8px;
+    margin-left: 10px;
     display: inline-block;
     padding: 2px;
     padding-bottom: 0;
     cursor: pointer;
+}
+.view-list-ul p::selection{
+    background-color: none;
+}
+.content .del{
     color: rgb(183, 183, 183);
 }
-.content p:hover{
-    margin-left: 12px;
+.content .del:hover{
     color: white;
     background-color: rgb(209, 0, 0);
+}
+.content .edit{
+    margin-left: 20px;
+    color: blue;
+}
+body:has(.content .del:hover)  .edit{
+    color: grey;
+}
+.content .edit:hover{
+    color: white;
+    background-color: blue;
 }
 .content h2{
     display: inline-block;
@@ -123,15 +144,4 @@ a{
     background-color: blue;
     color: white;
     margin-bottom: 5px;
-}
-.view-list-ul p::selection{
-    background-color: none;
-}
-.view-list-ul .edit {
-    color: blue;
-}
-.view-list-ul .edit:hover{
-    margin-left: 10px;
-    color: white;
-    background-color: blue;
 }

@@ -1,7 +1,7 @@
+CREATE DATABASE IF NOT EXISTS register;
 USE register;
 
-
--- @block -- USERS
+DROP TABLE IF EXISTS users;
 CREATE TABLE users(
     id INT PRIMARY KEY AUTO_INCREMENT,
     username VARCHAR(255) NOT NULL UNIQUE,
@@ -9,7 +9,7 @@ CREATE TABLE users(
     password VARCHAR(255) NOT NULL
 );
 
--- @block -- LISTS
+DROP TABLE IF EXISTS lists;
 CREATE TABLE lists(
     id INT AUTO_INCREMENT,
     name VARCHAR(255) NOT NULL,
@@ -18,7 +18,7 @@ CREATE TABLE lists(
     FOREIGN KEY (owner_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
--- @block -- TASKS
+DROP TABLE IF EXISTS tasks;
 CREATE TABLE tasks(
     id INT AUTO_INCREMENT,
     name VARCHAR(255) NOT NULL,

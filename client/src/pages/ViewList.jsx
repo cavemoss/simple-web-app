@@ -30,7 +30,7 @@ function ViewList(){
             axios.delete(`/backend/delete/tasks&${toDelete}`).then(response => {
 
                 if(response.data.status === 'success') {
-                    document.getElementById(toDelete).remove()
+                    document.getElementById(toDelete).style.display = 'none'
                 } else {
                     alert(response.data.message)
                 }
@@ -114,7 +114,7 @@ function ViewList(){
     return(
         <>
             <FunctionContext.Provider value={{setToDelete: setToDelete, setToUpdate: setToUpdate}}>
-            <h2>{listName}</h2><p onClick={deleteList}>Delete this list</p><br />
+            <h2>{listName}</h2><p className='del' onClick={deleteList}>Delete this list</p><br />
             <ul className="view-list-ul">
                 {backendData.map(element =>
 

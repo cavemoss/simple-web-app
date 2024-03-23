@@ -1,23 +1,20 @@
 const express = require('express')
-const cors = require('cors')
+const ip = require('ip')
 const mysql = require('mysql')
 const cookieParser = require('cookie-parser')
 const jwt = require('jsonwebtoken')
+const dotenv = require('dotenv')
 
 
 const app = express()
 app.use(express.json())
 app.use(cookieParser())
-app.use(cors({
-    origin: ["http://localhost:5173/"],
-    methods: ["POST", "GET"],
-    credentials: true
-}))
+dotenv.config()
 
 const db = mysql.createConnection({
-    host: "localhost",
+    host: "mysqldb",
     user: "root",
-    password: "141008!goR",
+    password: "password",
     database: "register"
 })
 
@@ -29,7 +26,7 @@ function verifyUser(request, response, next){
     if(!token) {return response.json({message: 'token required'})} 
     
     else {
-        jwt.verify(token, 'jsonwebtoken-secret-key', 
+        jwt.verify(token, process.env.JWT_TOKEN, 
 
             (error, decoded) => {
                 if (error) {return response.json({message: 'authentication error'})} 
@@ -55,6 +52,7 @@ app.get('/backend/:what&:id', verifyUser, (request, response) => {
     db.query(`SELECT * FROM ${what} WHERE id = ${id}`, 
 
         (error, data) => {
+            console.log(error)
             if (error) return response.json({message: 'server side error'})
 
             if (data.length > 0) {
@@ -75,7 +73,9 @@ app.post('/backend/register', (request, response) => {
     db.query('INSERT INTO users (username, email, password) VALUES (?, ?, ?)', [username, email, password],
 
         (error, result) => {
+            console.log(error)
             if (error) return response.json({message: 'user already exists'})
+            
             return response.json({status: 'success'})
         }  
     )
@@ -89,12 +89,13 @@ app.post('/backend/login', (request, response) => {
     db.query('SELECT * FROM users WHERE email = ? AND password = ?', [email, password], 
 
         (error, data) => {
-            if (error) return response.json({message: 'server side error'})
+            console.log(error)
+            if (error) {console.log(error); return response.json({message: 'server side error'})}
 
             if (data.length > 0) {
                 
                 const payload = {username: data[0].username, id: data[0].id}
-                const token = jwt.sign({payload}, 'jsonwebtoken-secret-key', {expiresIn: '1d'})
+                const token = jwt.sign({payload}, process.env.JWT_TOKEN, {expiresIn: '1d'})
                 response.cookie('token', token)
 
                 return response.json({status: 'success'})
@@ -115,6 +116,7 @@ app.post('/backend/create', verifyUser, (request, response) => {
     db.query('INSERT INTO lists (name, owner_id) VALUES (?, ?)', [name, ownerId], 
 
         (error, result) => {
+            console.log(error)
             if (error) return response.json({message: 'server side error'})
             return response.json({status: 'success'})
         }
@@ -130,6 +132,7 @@ app.post('/backend/add', verifyUser, (request, response) => {
     db.query('INSERT INTO tasks (name, owner_id) VALUES (?, ?);', [item, listId], 
 
         (error, result) => {
+            console.log(error)
             if (error) return response.json({message: 'server side error'})
             return response.json({status: 'success'})
         }
@@ -144,6 +147,7 @@ app.put('/backend/update', verifyUser, (request, response) => {
     db.query(`UPDATE tasks SET name = '${newName}' WHERE id = ${taskId}`,
 
         (error, result) => {
+            console.log(error)
             if (error) return response.json({message: 'server side error'})
             return response.json({status: 'success'})
         }
@@ -159,6 +163,7 @@ app.delete('/backend/delete/:what&:id', verifyUser, (request, response) => {
     db.query(`DELETE FROM ${what} WHERE id = ${id}`,
 
         (error, result) => {
+            console.log(error)
             if (error) return response.json({message: 'server side error'})
             return response.json({status: 'success'})
         }
@@ -172,6 +177,7 @@ app.delete('/backend/delete/user', verifyUser, (request, response) => {
     db.query(`DELETE FROM users WHERE id = ${userId}`,
 
         (error, result) => {
+            console.log(error)
             if (error) return response.json({message: 'server side error'})
             return response.json({status: 'success'})
         }
@@ -194,6 +200,7 @@ app.get('/backend/lists', verifyUser, (request, response) => {
         WHERE users.id = ${userId}`,
 
         (error, data) => {
+            console.log(error)
             if (error) return response.json({message: 'server side error'})
 
             if (data.length > 0) {
@@ -221,6 +228,7 @@ app.get('/backend/lists/:id', verifyUser, (request, response) => {
         WHERE lists.id = ${listId}`,
 
         (error, data) => {
+            console.log(error)
             if (error) return response.json({message: 'server side error'})
 
             if (data.length > 0) {
@@ -232,5 +240,4 @@ app.get('/backend/lists/:id', verifyUser, (request, response) => {
     )
 })
 
-
-app.listen(5000, () => console.log('Server started on port 5000 \n> http://localhost:5000'))
+app.listen(5000, () => console.log(`Server started at http://${ip.address()}:5000/backend`))

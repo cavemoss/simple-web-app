@@ -1,0 +1,36 @@
+version: "3.8"
+
+services:
+
+  client:
+    build: ./client
+    ports:
+      - 8080:8080
+
+  server:
+    build: ./server
+    ports:
+      - 5000:5000
+
+  mysqldb:
+    image: mysql:latest
+    container_name: mysqldb
+
+    environment:
+      MYSQL_DATABASE: 'register'
+      MYSQL_USER: 'root'
+      MYSQL_PASSWORD: 'password'
+      MYSQL_ROOT_PASSWORD: 'password'
+
+    command: --init-file /data/application/init.sql
+    volumes:
+      - ./server/init.sql:/data/application/init.sql
+      - db:/var/lib/mysql
+      
+    ports:
+      - '33066:3306'
+    expose:
+      - '3306'
+
+volumes:
+  db:
