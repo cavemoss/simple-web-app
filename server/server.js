@@ -12,7 +12,7 @@ app.use(cookieParser())
 dotenv.config()
 
 const db = mysql.createConnection({
-    host: "mysqldb",
+    host: "mysqldb", // the name of the mysql docker container
     user: "root",
     password: "password",
     database: "register"
@@ -52,8 +52,7 @@ app.get('/backend/:what&:id', verifyUser, (request, response) => {
     db.query(`SELECT * FROM ${what} WHERE id = ${id}`, 
 
         (error, data) => {
-            console.log(error)
-            if (error) return response.json({message: 'server side error'})
+            if (error) {console.log(error); return response.json({message: 'server side error'})}
 
             if (data.length > 0) {
                 response.send(data)
@@ -73,9 +72,7 @@ app.post('/backend/register', (request, response) => {
     db.query('INSERT INTO users (username, email, password) VALUES (?, ?, ?)', [username, email, password],
 
         (error, result) => {
-            console.log(error)
-            if (error) return response.json({message: 'user already exists'})
-            
+            if (error) {console.log(error); return response.json({message: 'server side error'})}    
             return response.json({status: 'success'})
         }  
     )
@@ -89,7 +86,6 @@ app.post('/backend/login', (request, response) => {
     db.query('SELECT * FROM users WHERE email = ? AND password = ?', [email, password], 
 
         (error, data) => {
-            console.log(error)
             if (error) {console.log(error); return response.json({message: 'server side error'})}
 
             if (data.length > 0) {
@@ -116,12 +112,10 @@ app.post('/backend/create', verifyUser, (request, response) => {
     db.query('INSERT INTO lists (name, owner_id) VALUES (?, ?)', [name, ownerId], 
 
         (error, result) => {
-            console.log(error)
-            if (error) return response.json({message: 'server side error'})
+            if (error) {console.log(error); return response.json({message: 'server side error'})}
             return response.json({status: 'success'})
         }
     )
-
 })
 
 app.post('/backend/add', verifyUser, (request, response) => {
@@ -132,8 +126,7 @@ app.post('/backend/add', verifyUser, (request, response) => {
     db.query('INSERT INTO tasks (name, owner_id) VALUES (?, ?);', [item, listId], 
 
         (error, result) => {
-            console.log(error)
-            if (error) return response.json({message: 'server side error'})
+            if (error) {console.log(error); return response.json({message: 'server side error'})}
             return response.json({status: 'success'})
         }
     )
@@ -147,12 +140,10 @@ app.put('/backend/update', verifyUser, (request, response) => {
     db.query(`UPDATE tasks SET name = '${newName}' WHERE id = ${taskId}`,
 
         (error, result) => {
-            console.log(error)
-            if (error) return response.json({message: 'server side error'})
+            if (error) {console.log(error); return response.json({message: 'server side error'})}
             return response.json({status: 'success'})
         }
     )
-
 })
 
 app.delete('/backend/delete/:what&:id', verifyUser, (request, response) => {
@@ -163,8 +154,7 @@ app.delete('/backend/delete/:what&:id', verifyUser, (request, response) => {
     db.query(`DELETE FROM ${what} WHERE id = ${id}`,
 
         (error, result) => {
-            console.log(error)
-            if (error) return response.json({message: 'server side error'})
+            if (error) {console.log(error); return response.json({message: 'server side error'})}
             return response.json({status: 'success'})
         }
     )
@@ -177,8 +167,7 @@ app.delete('/backend/delete/user', verifyUser, (request, response) => {
     db.query(`DELETE FROM users WHERE id = ${userId}`,
 
         (error, result) => {
-            console.log(error)
-            if (error) return response.json({message: 'server side error'})
+            if (error) {console.log(error); return response.json({message: 'server side error'})}
             return response.json({status: 'success'})
         }
     )
@@ -200,8 +189,7 @@ app.get('/backend/lists', verifyUser, (request, response) => {
         WHERE users.id = ${userId}`,
 
         (error, data) => {
-            console.log(error)
-            if (error) return response.json({message: 'server side error'})
+            if (error) {console.log(error); return response.json({message: 'server side error'})}
 
             if (data.length > 0) {
                 response.send(data)
@@ -228,8 +216,7 @@ app.get('/backend/lists/:id', verifyUser, (request, response) => {
         WHERE lists.id = ${listId}`,
 
         (error, data) => {
-            console.log(error)
-            if (error) return response.json({message: 'server side error'})
+            if (error) {console.log(error); return response.json({message: 'server side error'})}
 
             if (data.length > 0) {
                 response.send(data)

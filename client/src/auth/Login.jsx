@@ -56,7 +56,7 @@ function Login(){
                     
                     <br />
 
-                    <button className="submit-button" type="submit"> Login </button>
+                    <button type="submit"> Login </button>
                 </form>
                 <p>Sign Up <a href='' onClick={() => navigate('/register')}>here</a></p>
             </div>

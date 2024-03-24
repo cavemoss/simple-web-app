@@ -31,7 +31,8 @@ a{
     background-color: rgb(250, 250, 250);
     border-radius: 10px;
     position: absolute;
-    margin-top: 50px;
+    margin-top: 80px;
+    transition: margin-top 0.3s;
     left: 50%;
     transform: translate(-50%);
     padding: 20px;
@@ -118,7 +119,7 @@ a{
     padding-bottom: 0;
     cursor: pointer;
 }
-.view-list-ul p::selection{
+.content p::selection{
     background-color: none;
 }
 .content .del{
@@ -154,8 +155,12 @@ body:has(.content .del:hover)  .edit{
     margin-bottom: 5px;
 }
 
-@media screen and (max-width: 600px){
-    :root{
-        overflow-x: hidden;
+html, body {
+    overflow-x: hidden;
+}
+
+@media screen and (max-height: 500px){
+    .card{
+        margin-top: 10px;
     }
 }

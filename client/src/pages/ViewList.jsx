@@ -1,8 +1,8 @@
 import { useEffect, useState, createContext } from "react"
 import axios from "axios"
 import { useNavigate, useParams } from "react-router-dom"
-import Task from "./Task"
-import TaskEdit from "./TaskEdit"
+import Task from "./components/Task"
+import TaskEdit from "./components/TaskEdit"
 
 export const FunctionContext = createContext()
 
@@ -115,7 +115,7 @@ function ViewList(){
         <>
             <FunctionContext.Provider value={{setToDelete: setToDelete, setToUpdate: setToUpdate}}>
             <h2>{listName}</h2><p className='del' onClick={deleteList}>Delete this list</p><br />
-            <ul className="view-list-ul">
+            <ul>
                 {backendData.map(element =>
 
                     <li key={element.task_id} id={element.task_id}>
