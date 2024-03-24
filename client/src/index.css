@@ -25,6 +25,10 @@ h1, h2{
 a{
     color: blue;
 }
+input:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px blue;
+}
 .card{
     display: inline-block;
     border: 1px solid rgb(181, 181, 181);
