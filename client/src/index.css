@@ -1,3 +1,8 @@
+:root{
+    --navbar-left: 0;
+    --content-margin: 260px;
+    --content-width: auto;
+}
 @font-face {
     font-family: Epilogue-Regular;
     src: url(../fonts/Epilogue-Regular.ttf);
@@ -58,8 +63,9 @@ a{
 }
 .navbar{
     position: fixed;
+    transition: left 0.6s;
     top: 0;
-    left: 0;
+    left: var(--navbar-left);
     height: 100%;
     width: 240px;
     background-color: black;
@@ -76,8 +82,10 @@ a{
     margin-left: 5px;
 }
 .content{
+    transition: margin-left 0.6s;
     margin-top: 50px;
-    margin-left: 260px;
+    margin-left: var(--content-margin);
+    width: var(--content-width);
 }
 .content input{
     padding: 6px;
@@ -144,4 +152,10 @@ body:has(.content .del:hover)  .edit{
     background-color: blue;
     color: white;
     margin-bottom: 5px;
+}
+
+@media screen and (max-width: 600px){
+    :root{
+        overflow-x: hidden;
+    }
 }

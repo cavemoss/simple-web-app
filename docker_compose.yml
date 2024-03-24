@@ -26,11 +26,16 @@ services:
     volumes:
       - ./server/init.sql:/data/application/init.sql
       - db:/var/lib/mysql
-      
-    ports:
-      - '33066:3306'
-    expose:
-      - '3306'
 
+    ports:
+      - 33066:3306
+    expose:
+      - 3306
+
+  nginx:
+    build: ./nginx
+    ports:
+      - 80:80
+    
 volumes:
   db:
